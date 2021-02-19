@@ -11,15 +11,10 @@ def getText(filename):
 def hasYear(inputString):
     return bool(re.search(r'[0-9]{4}', inputString))
 
+# Edit the word file name/location here:
 text = getText("./Chapter 23 Climate Change and Sharks, Rummer et al., 5Feb.2021.docx")
 
-pattern = re.compile(r'\((.*?)\)')
-# get everything in brackets
-for match in re.findall(pattern, text):
-    #if text contains year
-    if (hasYear(match)):
+pattern = re.compile(r'\((.*?)\)') # get everything in brackets
+for match in re.findall(pattern, text): # loop through results
+    if (hasYear(match)): # if text contains year
         print(match)
-
-
-
-#print(text)
