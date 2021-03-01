@@ -1,20 +1,26 @@
-import docx
+""" Extract references from Word document """
 import re
+import docx
 
-def getText(filename):
+
+def get_text(filename):
+    """ Get text from .docx files """
     doc = docx.Document(filename)
-    fullText = []
+    full_text = []
     for para in doc.paragraphs:
-        fullText.append(para.text)
-    return '\n'.join(fullText)
+        full_text.append(para.text)
+    return "\n".join(full_text)
 
-def hasYear(inputString):
-    return bool(re.search(r'[0-9]{4}', inputString))
+
+def has_year(input_string):
+    """ Returns true or false if string contains four consecutive numbers """
+    return bool(re.search(r"[0-9]{4}", input_string))
+
 
 # Edit the word file name/location here:
-text = getText("./Chapter 23 Climate Change and Sharks, Rummer et al., 5Feb.2021.docx")
+TEXT = get_text("./Chapter 23 Climate Change and Sharks, Rummer et al., 5Feb.2021.docx")
 
-pattern = re.compile(r'\((.*?)\)') # get everything in brackets
-for match in re.findall(pattern, text): # loop through results
-    if (hasYear(match)): # if text contains year
+pattern = re.compile(r"\((.*?)\)")  # get everything in brackets
+for match in re.findall(pattern, TEXT):  # loop through results
+    if has_year(match):  # if text contains year
         print(match)
